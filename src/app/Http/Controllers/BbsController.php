@@ -17,7 +17,7 @@ class BbsController extends Controller
 
     public function list()
     {
-        return view('app/bbs/index', []);
+        return view('app/bbs/list', []);
     }
 
     public function create()
