@@ -15,21 +15,15 @@
 Route::get('/', 'SentenceController@list')->name('sentence@list');
 
 // Sentence
-Route::match([
-    'get',
-    'post'
-], '/create', 'SentenceController@create')->name('sentence@create');
-
 Route::get('/{id}', 'SentenceController@get')->name('sentence@get')->where([
     'id' => '[1-9]+[0-9]{0,9}'
 ]);
 
 // Account
 Route::group([
-    'middleware' => 'account'
+    'middleware' => 'auth'
 ], function () {
-    Route::post('/create-confirm', 'SentenceController@createCnf')->name('sentence@create_cnf');
-    Route::post('/create-complete', 'SentenceController@createCmp')->name('sentence@create_cmp');
+    Route::post('/create', 'SentenceController@create')->name('sentence@create');
 
     Route::match([
         'get',

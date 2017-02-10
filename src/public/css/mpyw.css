@@ -13,7 +13,7 @@ html,body {
 /* 吹き出し・全共通 */
 .balloon {
   position: relative;
-  width: 200px; /* 幅 */
+  width: 400px; /* 幅 */
   min-height: 60px; /* 最小の高さ */
   margin: 20px; /* 外側の余白 */
   padding: 10px; /* 内側の余白 */

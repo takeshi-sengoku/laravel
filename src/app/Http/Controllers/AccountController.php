@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controller;
 use Illuminate\Support\Facades\View;
-use App\Http\Requests\User\ {
+use App\Http\Requests\Account\ {
     CreateRequest,
     UpdateRequest,
     DeleteRequest
@@ -17,17 +17,17 @@ class AccountController extends Controller
 
     public function index()
     {
-        return view('app/user/list', []);
+        return view('app/account/list', []);
     }
 
     public function create()
     {
-        return view('app/user/create', []);
+        return view('app/account/create', []);
     }
 
     public function createCnf(CreateRequest $request)
     {
-        return view('app/user/create_cnf', []);
+        return view('app/account/create_cnf', []);
     }
 
     public function createCmp()
@@ -35,17 +35,17 @@ class AccountController extends Controller
 
     public function get($id)
     {
-        return view('app/user/get', []);
+        return view('app/account/get', []);
     }
 
     public function update($id)
     {
-        return view('app/user/update', []);
+        return view('app/account/update', []);
     }
 
     public function udpateCnf(UpdateRequest $request, $id)
     {
-        return view('app/user/update_cnf', []);
+        return view('app/account/update_cnf', []);
     }
 
     public function udpateCmp($id)
@@ -53,7 +53,7 @@ class AccountController extends Controller
 
     public function deleteCnf(DeleteRequest $request, $id)
     {
-        return view('app/user/delete_cnf', []);
+        return view('app/account/delete_cnf', []);
     }
 
     public function deleteCmp($id)

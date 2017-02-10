@@ -2,3 +2,35 @@
 tr.error > th {
 	background-color: #f00;
 }
+
+.main {
+	border-radius: 5px;
+	padding: 10px;
+	min-height: 80%;
+}
+
+.img-me {
+    width: 100%;
+    height: 480px;
+    background: url('../img/figure_ouen.png');
+}
+
+.pad-right-0 {
+	padding-right: 0px;
+}
+
+.pad-left-0 {
+	padding-left: 0px;
+}
+
+img.img-friend {
+    transform: scale(-1, 1);
+    max-width: 90px;
+    height: auto;
+}
+
+img.img-me {
+    transform: scale(1, 1);
+    max-width: 90px;
+    height: auto;
+}

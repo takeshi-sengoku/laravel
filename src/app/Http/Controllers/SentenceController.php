@@ -3,11 +3,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controller;
 use Illuminate\Support\Facades\View;
-use App\Http\Requests\Bbs\ {
+use App\Http\Requests\Sentence\ {
     CreateRequest,
     UpdateRequest,
     DeleteRequest
 };
+use sample\api\admin\Api\AdminApi;
 
 class SentenceController extends Controller
 {
@@ -17,17 +18,22 @@ class SentenceController extends Controller
 
     public function list()
     {
-        return view('app/bbs/list', []);
+        $adminApi = new AdminApi();
+        $config = $adminApi->getApiClient()->getConfig()->setSSLVerification(false);
+        $config->addDefaultHeader('X-DatabaseUser', 'sample_admin');
+        $adminApi->listAdmin();
+
+        return view('app/sentence/list', []);
     }
 
     public function create()
     {
-        return view('app/bbs/create', []);
+        return view('app/sentence/create', []);
     }
 
     public function createCnf(CreateRequest $request)
     {
-        return view('app/bbs/create_cnf', []);
+        return view('app/sentence/create_cnf', []);
     }
 
     public function createCmp()
@@ -35,17 +41,17 @@ class SentenceController extends Controller
 
     public function get($id)
     {
-        return view('app/bbs/get', []);
+        return view('app/sentence/get', []);
     }
 
     public function update($id)
     {
-        return view('app/bbs/update', []);
+        return view('app/sentence/update', []);
     }
 
     public function udpateCnf(UpdateRequest $request, $id)
     {
-        return view('app/bbs/update_cnf', []);
+        return view('app/sentence/update_cnf', []);
     }
 
     public function udpateCmp($id)
@@ -53,7 +59,7 @@ class SentenceController extends Controller
 
     public function deleteCnf(DeleteRequest $request, $id)
     {
-        return view('app/bbs/delete_cnf', []);
+        return view('app/sentence/delete_cnf', []);
     }
 
     public function deleteCmp($id)
