@@ -13,10 +13,7 @@
 
 	<link rel="stylesheet" href="/css/sample.css">
 
-	<!--[if lt IE 9]>
-		<script type="text/javascript" src="demo/ie/htmlshiv.js"></script>
-		<script type="text/javascript" src="demo/ie/respond.src.js"></script>
-	<![endif]-->
+	<link rel="stylesheet" href="/css/mpyw.css">
 </head>
 <body>
 

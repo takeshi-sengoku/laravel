@@ -9,7 +9,7 @@ use App\Http\Requests\User\ {
     DeleteRequest
 };
 
-class UserController extends Controller
+class AuthController extends Controller
 {
 
     public function __construct()

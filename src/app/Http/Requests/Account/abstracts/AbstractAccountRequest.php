@@ -1,13 +1,13 @@
 <?php
-namespace App\Http\Requests\User\abstracts;
+namespace App\Http\Requests\Account\abstracts;
 
-class AbstractUserRequest extends \Illuminate\Foundation\Http\FormRequest
+class AbstractAccountRequest extends \Illuminate\Foundation\Http\FormRequest
 {
 
     public function rules()
     {
         return [
-            'name' => [
+            'screen_name' => [
                 'bail',
                 'required',
                 'min:6',
@@ -17,7 +17,7 @@ class AbstractUserRequest extends \Illuminate\Foundation\Http\FormRequest
                 'bail',
                 'required',
                 'min:6',
-                'max:255'
+                'max:256'
             ],
             'mail' => [
                 'bail',
@@ -25,21 +25,6 @@ class AbstractUserRequest extends \Illuminate\Foundation\Http\FormRequest
                 'min:6',
                 'max:255',
                 'mail'
-            ],
-            'user_type' => [
-                'bail',
-                'required',
-                'user_type'
-            ],
-            'hide_name' => [
-                'bail',
-                'required',
-                'hide_type'
-            ],
-            'hidd_mail' => [
-                'bail',
-                'required',
-                'hide_type'
             ],
             'expired' => [
                 'bail',

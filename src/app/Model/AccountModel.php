@@ -1,6 +1,6 @@
 <?php
 namespace App\Model;
 
-class BbsModel
+class AccountModel
 {
 }

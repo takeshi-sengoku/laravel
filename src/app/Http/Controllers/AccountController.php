@@ -3,31 +3,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Controller;
 use Illuminate\Support\Facades\View;
-use App\Http\Requests\Bbs\ {
+use App\Http\Requests\User\ {
     CreateRequest,
     UpdateRequest,
     DeleteRequest
 };
 
-class BbsController extends Controller
+class AccountController extends Controller
 {
 
     public function __construct()
     {}
 
-    public function list()
+    public function index()
     {
-        return view('app/bbs/list', []);
+        return view('app/user/list', []);
     }
 
     public function create()
     {
-        return view('app/bbs/create', []);
+        return view('app/user/create', []);
     }
 
     public function createCnf(CreateRequest $request)
     {
-        return view('app/bbs/create_cnf', []);
+        return view('app/user/create_cnf', []);
     }
 
     public function createCmp()
@@ -35,17 +35,17 @@ class BbsController extends Controller
 
     public function get($id)
     {
-        return view('app/bbs/get', []);
+        return view('app/user/get', []);
     }
 
     public function update($id)
     {
-        return view('app/bbs/update', []);
+        return view('app/user/update', []);
     }
 
     public function udpateCnf(UpdateRequest $request, $id)
     {
-        return view('app/bbs/update_cnf', []);
+        return view('app/user/update_cnf', []);
     }
 
     public function udpateCmp($id)
@@ -53,7 +53,7 @@ class BbsController extends Controller
 
     public function deleteCnf(DeleteRequest $request, $id)
     {
-        return view('app/bbs/delete_cnf', []);
+        return view('app/user/delete_cnf', []);
     }
 
     public function deleteCmp($id)
