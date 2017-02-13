@@ -19,6 +19,10 @@ Route::get('/{id}', 'SentenceController@get')->name('sentence@get')->where([
     'id' => '[1-9]+[0-9]{0,9}'
 ]);
 
+Route::get('/{screen_name}', 'SentenceController@userList')->name('sentence@user_list')->where([
+    'screen_name' => '[A-Za-z\d]{6,}'
+]);
+
 // Account
 Route::group([
     'middleware' => 'auth'

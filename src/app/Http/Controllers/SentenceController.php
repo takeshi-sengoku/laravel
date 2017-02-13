@@ -8,7 +8,10 @@ use App\Http\Requests\Sentence\ {
     UpdateRequest,
     DeleteRequest
 };
-use sample\api\admin\Api\AdminApi;
+use App\Model\SentenceModel;
+use App\Model\AdminModel;
+use sample\api\account\Model\Account;
+use App\Model\AccountModel;
 
 class SentenceController extends Controller
 {
@@ -18,12 +21,27 @@ class SentenceController extends Controller
 
     public function list()
     {
-        $adminApi = new AdminApi();
-        $config = $adminApi->getApiClient()->getConfig()->setSSLVerification(false);
-        $config->addDefaultHeader('X-DatabaseUser', 'sample_admin');
-        $adminApi->listAdmin();
+        $account_list = AccountModel::list();
+dd($account_list);
+        $sentence_list = SentenceModel::list();
 
-        return view('app/sentence/list', []);
+        return view('app/sentence/list', [
+            'sentence_list' => $sentence_list['data'],
+            //
+            'login_user' => [
+                'user_id' => '100001000000000001',
+            ],
+            'user_list' => [
+                '100001000000000001' => [
+                    'screen_name' => 'sakura',
+                    'name' => 'さくら',
+                ],
+                '100001000000000002' => [
+                    'screen_name' => 'unyuu',
+                    'name' => 'うにゅう',
+                ],
+            ],
+        ]);
     }
 
     public function create()
