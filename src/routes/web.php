@@ -15,11 +15,13 @@
 Route::get('/', 'SentenceController@list')->name('sentence@list');
 
 // Sentence
-Route::get('/{id}', 'SentenceController@get')->name('sentence@get')->where([
-    'id' => '[1-9]+[0-9]{0,9}'
+Route::get('/{screen_name}/{id}', 'SentenceController@get')->name('sentence@get')->where([
+    'screen_name' => '[A-Za-z\d]+',
+    'id' => '\d{1,64}'
 ]);
 
-Route::get('/{screen_name}', 'SentenceController@userList')->name('sentence@user_list')->where([
+// Timeline
+Route::get('/{screen_name}', 'SentenceController@timeLine')->name('sentence@timeline')->where([
     'screen_name' => '[A-Za-z\d]{6,}'
 ]);
 

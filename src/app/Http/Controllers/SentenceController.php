@@ -8,10 +8,11 @@ use App\Http\Requests\Sentence\ {
     UpdateRequest,
     DeleteRequest
 };
-use App\Model\SentenceModel;
-use App\Model\AdminModel;
-use sample\api\account\Model\Account;
-use App\Model\AccountModel;
+use App\Model\ {
+    SentenceModel,
+    AccountModel
+};
+use ickx\fw2\vartype\arrays\Arrays;
 
 class SentenceController extends Controller
 {
@@ -21,26 +22,10 @@ class SentenceController extends Controller
 
     public function list()
     {
-        $account_list = AccountModel::list();
-dd($account_list);
-        $sentence_list = SentenceModel::list();
-
         return view('app/sentence/list', [
-            'sentence_list' => $sentence_list['data'],
-            //
-            'login_user' => [
-                'user_id' => '100001000000000001',
-            ],
-            'user_list' => [
-                '100001000000000001' => [
-                    'screen_name' => 'sakura',
-                    'name' => 'さくら',
-                ],
-                '100001000000000002' => [
-                    'screen_name' => 'unyuu',
-                    'name' => 'うにゅう',
-                ],
-            ],
+            'sentence_list' => SentenceModel::list()['data'],
+            'user_list' => $account_list = Arrays::MultiColumn(AccountModel::list()['data'], 'user_id'),
+            'login_user' => $account_list['100001000000000002']
         ]);
     }
 
@@ -57,9 +42,24 @@ dd($account_list);
     public function createCmp()
     {}
 
-    public function get($id)
+    public function get($screen_name, $id)
     {
-        return view('app/sentence/get', []);
+        //$screen_name
+        $user = AccountModel::search(AccountModel::apiModelFactory([
+            'screen_name' => $screen_name
+        ]))['data'] ?? [];
+        $user = array_shift($user);
+
+        $sentence = SentenceModel::get($id);
+
+        return view('app/sentence/get', [
+            'user' => $user,
+            'sentence' => $sentence,
+
+            //
+            'user_list' => $account_list = Arrays::MultiColumn(AccountModel::list()['data'], 'user_id'),
+            'login_user' => $account_list['100001000000000002']
+        ]);
     }
 
     public function update($id)

@@ -5,14 +5,21 @@
 <?php
 $user_id = $sentence['user_id'];
 $user = $user_list[$user_id];
+
+$sentence_url = route('sentence@get', ['screen_name' => $user['screen_name'], 'id' => $sentence['sentence_id']]);
+$timeline_url = route('sentence@timeline', ['screen_name' => $user['screen_name']]);
+
+$is_own = $user_id == $login_user['user_id'];
+
+$sentence_text = nl2br(e($sentence['sentence']));
 ?>
 	<div class="row text-left color-dark">
-@if ($user_id == $login_user['user_id'])
+@if ($is_own)
 		<div class="col md-1"></div>
 		<div class="col md-9 pad-right-0">
-			<a href="{{ route('sentence@get', ['screen_name' => $user['screen_name'], 'sentence_id' => $sentence['sentence_id']]) }}">
+			<a href="{{ $sentence_url }}">
 				<div class="text-left balloon balloon-me balloon--right_top">
-					<div>{!! nl2br(e($sentence['sentence'])) !!}</div>
+					<div>{!! $sentence_text !!}</div>
 				</div>
 			</a>
 		</div>
@@ -21,12 +28,12 @@ $user = $user_list[$user_id];
 		</div>
 @else
 		<div class="col md-2 pad-right-0">
-			<a href="{{ route('sentence@user_list', ['screen_name' => $user['screen_name']]) }}"><img src="/img/figure_ouen.png" class="img-me" alt="{{ $user['name'] }}"></a>
+			<a href="{{ $timeline_url }}"><img src="/img/figure_ouen.png" class="img-me" alt="{{ $user['name'] }}"></a>
 		</div>
 		<div class="col md-9 pad-left-0">
-			<a href="{{ route('sentence@get', ['screen_name' => $user['screen_name'], 'sentence_id' => $sentence['sentence_id']]) }}">
+			<a href="{{ $sentence_url }}">
 				<div class="text-left balloon balloon--left_top">
-					<div>{!! nl2br(e($sentence['sentence'])) !!}</div>
+					<div>{!! $sentence_text !!}</div>
 				</div>
 			</a>
 		</div>

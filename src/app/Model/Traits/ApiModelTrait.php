@@ -7,6 +7,8 @@ trait ApiModelTrait {
 
     protected $api = null;
 
+    protected $apiModelClassPath = null;
+
     protected $classPart = '';
 
     protected function __construct($class_path)
@@ -18,6 +20,8 @@ trait ApiModelTrait {
             ->getConfig()
             ->addDefaultHeader('X-DatabaseUser', sprintf('sample_%s', strtolower($this->classPart)))
             ->setSSLVerification(false);
+
+        $this->apiModelClassPath = sprintf("sample\\api\\%1\$s\\Model\\%1\$s", $this->classPart);
     }
 
     protected static function factory()
@@ -39,5 +43,10 @@ trait ApiModelTrait {
     public static function getApi()
     {
         return $this->api;
+    }
+
+    public static function apiModelFactory ($data) {
+        $api_model_class_path = (static::$instance ?? static::$instance = static::factory())->apiModelClassPath;
+        return new $api_model_class_path($data);
     }
 }
