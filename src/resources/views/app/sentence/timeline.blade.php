@@ -36,7 +36,6 @@ $(document).ready(function(){
 @foreach($sentence_list as $sentence)
 <?php
 $user_id = $sentence['user_id'];
-$user = $user_list[$user_id];
 
 $sentence_url = route('sentence@get', [
     'screen_name' => $user['screen_name'],

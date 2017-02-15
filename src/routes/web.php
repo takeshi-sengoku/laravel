@@ -21,8 +21,8 @@ Route::get('/{screen_name}/{id}', 'SentenceController@get')->name('sentence@get'
 ]);
 
 // Timeline
-Route::get('/{screen_name}', 'SentenceController@timeLine')->name('sentence@timeline')->where([
-    'screen_name' => '[A-Za-z\d]{6,}'
+Route::get('/{screen_name}', 'SentenceController@timeline')->name('sentence@timeline')->where([
+    'screen_name' => '[A-Za-z\d]+'
 ]);
 
 // Account

@@ -22,7 +22,7 @@ $sentence_text = nl2br(e($sentence['sentence']));
 			</a>
 		</div>
 		<div class="col md-2 pad-left-0">
-			<img src="/img/figure_ouen.png" class="img-friend">
+			<a href="{{ $timeline_url }}"><img src="/img/figure_ouen.png" class="img-friend"></a>
 		</div>
 @else
 		<div class="col md-2 pad-right-0">
@@ -39,7 +39,6 @@ $sentence_text = nl2br(e($sentence['sentence']));
 @endif
 	</div>
 
-	{{ Form::open(['route' => 'sentence@create']) }}
 	<div class="row">
 		<div class="col md-12">
 			{{ Form::textarea('sentence', null, ['class' => 'form-control']) }}
@@ -51,7 +50,6 @@ $sentence_text = nl2br(e($sentence['sentence']));
 			<button type="submit" class="form-control btn btn-lg btn-warning">センテンス！！</button>
 		</div>
 	</div>
-	{{ Form::close() }}
 </div>
 
 @endsection

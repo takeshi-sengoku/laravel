@@ -4,17 +4,18 @@ use Illuminate\Support\ServiceProvider;
 use App\Http\ViewComposers as ViewComposers;
 
 /**
- * ViewComposer�p�v���o�C�_
+ * ViewComposer用プロバイダ
  */
 class ViewComposerProvider extends ServiceProvider
 {
 
     /**
-     * �v���o�C�_�u�[�g�X�g���b�v
+     * プロバイダブートストラップ
      */
     public function boot()
     {
         \View::composers([
+            ViewComposers\AccountComposer::class => '*',
         ]);
     }
 }

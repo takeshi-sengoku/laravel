@@ -24,10 +24,30 @@ class SentenceController extends Controller
     {
         return view('app/sentence/list', [
             'sentence_list' => SentenceModel::list()['data'],
-            'user_list' => $account_list = Arrays::MultiColumn(AccountModel::list()['data'], 'user_id'),
-            'login_user' => $account_list['100001000000000002']
+            'user_list' => Arrays::MultiColumn(AccountModel::list()['data'], 'user_id')
         ]);
     }
+
+    public function timeline($screen_name)
+    {
+        // $screen_name
+        $user = AccountModel::search(AccountModel::apiModelFactory([
+            'screen_name' => $screen_name
+        ]))['data'] ?? [];
+        $user = array_shift($user);
+
+        $sentence_list = SentenceModel::search(SentenceModel::apiModelFactory([
+            'user_id' => $user['user_id']
+        ]))['data'] ?? [];
+
+        return view('app/sentence/timeline', [
+            'user' => $user,
+            'sentence_list' => $sentence_list
+        ]);
+    }
+
+    public function directCreate(CreateRequest $request)
+    {}
 
     public function create()
     {
@@ -44,7 +64,7 @@ class SentenceController extends Controller
 
     public function get($screen_name, $id)
     {
-        //$screen_name
+        // $screen_name
         $user = AccountModel::search(AccountModel::apiModelFactory([
             'screen_name' => $screen_name
         ]))['data'] ?? [];
@@ -54,11 +74,7 @@ class SentenceController extends Controller
 
         return view('app/sentence/get', [
             'user' => $user,
-            'sentence' => $sentence,
-
-            //
-            'user_list' => $account_list = Arrays::MultiColumn(AccountModel::list()['data'], 'user_id'),
-            'login_user' => $account_list['100001000000000002']
+            'sentence' => $sentence
         ]);
     }
 
