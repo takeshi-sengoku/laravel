@@ -8,6 +8,15 @@
 	<script type="text/javascript">
 
 $(document).ready(function(){
+  $('#post').attr('disabled', 'disabled');
+
+  $('#sentence').keyup(function () {
+    if ($(this).val().length > 0) {
+      $('#post').removeAttr('disabled');
+    } else {
+      $('#post').attr('disabled', 'disabled');
+    }
+  });
 
   $('#post').click(function () {
     $.ajaxSetup({
@@ -16,11 +25,16 @@ $(document).ready(function(){
       }
     });
 
+    $('#sentence').attr('disabled', 'disabled');
+
     $.ajax({
-      type: 'POST',
+      type: 'post',
       url: '{{ route('sentence@create') }}',
       data: {'sentence' : $('#sentence').val()},
-      success: function () {
+      success: function (data) {
+          if (data.result) {
+              location.reload(true);
+          }
       },
       dataType: 'json'
     });

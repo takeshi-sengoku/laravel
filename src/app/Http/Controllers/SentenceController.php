@@ -46,21 +46,14 @@ class SentenceController extends Controller
         ]);
     }
 
-    public function directCreate(CreateRequest $request)
-    {}
-
-    public function create()
+    public function create(CreateRequest $request)
     {
-        return view('app/sentence/create', []);
-    }
+        SentenceModel::create(SentenceModel::apiModelFactory([
+            'sentence' => $request->request->get('sentence'),
+        ]));
 
-    public function createCnf(CreateRequest $request)
-    {
-        return view('app/sentence/create_cnf', []);
+        return response()->json(['result' => true]);
     }
-
-    public function createCmp()
-    {}
 
     public function get($screen_name, $id)
     {

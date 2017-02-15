@@ -5,9 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Custom\CustomValidator;
 
-/**
- * Validator用プロバイダ
- */
 class ValidatorServiceProvider extends ServiceProvider
 {
 
