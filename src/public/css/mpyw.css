@@ -1,13 +1,14 @@
 /* http://qiita.com/mpyw/items/6fa3965271f7d7f42be1 */
 
 /* 表示用 */
-html,body {
+.flexbox {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .row {
   display: flex;
 }

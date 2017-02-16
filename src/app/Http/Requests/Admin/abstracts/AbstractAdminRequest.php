@@ -3,6 +3,12 @@ namespace App\Http\Requests\Admin\abstracts;
 
 class AbstractAdminRequest extends \Illuminate\Foundation\Http\FormRequest
 {
+    protected $dontFlash = [
+    ];
+
+    public function authorize () {
+        return true;
+    }
 
     public function rules()
     {
@@ -22,14 +28,12 @@ class AbstractAdminRequest extends \Illuminate\Foundation\Http\FormRequest
             'mail' => [
                 'bail',
                 'required',
-                'min:6',
-                'max:255',
-                'mail'
+                'min:1',
+                'email'
             ],
             'expired' => [
                 'bail',
-                'required',
-                'datetime'
+//                'required',
             ]
         ];
     }

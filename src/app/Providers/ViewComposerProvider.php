@@ -15,7 +15,7 @@ class ViewComposerProvider extends ServiceProvider
     public function boot()
     {
         \View::composers([
-            ViewComposers\AccountComposer::class => '*',
+            ViewComposers\AccountComposer::class => 'app.sentence.*',
         ]);
     }
 }

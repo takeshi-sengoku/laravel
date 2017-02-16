@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nobody')
 
 @section('content')
 		<div class="col md-9 float-right">

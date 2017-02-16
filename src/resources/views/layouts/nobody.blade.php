@@ -10,7 +10,6 @@
 
 	<link rel="stylesheet" href="/css/skyblue.min.css">
 	<link rel="stylesheet" href="/css/docs.css">
-	<link rel="stylesheet" href="/google-code-prettify/prettify.css">
 
 	<link rel="stylesheet" href="/css/sample.css">
 

@@ -3,6 +3,9 @@ namespace App\Http\Requests\Account\abstracts;
 
 class AbstractAccountRequest extends \Illuminate\Foundation\Http\FormRequest
 {
+    public function authorize () {
+        return true;
+    }
 
     public function rules()
     {
@@ -22,9 +25,7 @@ class AbstractAccountRequest extends \Illuminate\Foundation\Http\FormRequest
             'mail' => [
                 'bail',
                 'required',
-                'min:6',
-                'max:255',
-                'mail'
+                'email'
             ],
             'expired' => [
                 'bail',
