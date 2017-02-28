@@ -49,10 +49,12 @@ class SentenceController extends Controller
     public function create(CreateRequest $request)
     {
         SentenceModel::create(SentenceModel::apiModelFactory([
-            'sentence' => $request->request->get('sentence'),
+            'sentence' => $request->request->get('sentence')
         ]));
 
-        return response()->json(['result' => true]);
+        return response()->json([
+            'result' => true
+        ]);
     }
 
     public function get($screen_name, $id)

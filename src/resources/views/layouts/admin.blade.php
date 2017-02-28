@@ -29,6 +29,7 @@
 			<div class="sidemenu js-sidemenu">
 				<h5>メニュー</h5>
 				<div>
+					<a href="">コンシューマキー追加</a>
 					<a href="{{ route('admin@create') }}">管理者追加</a>
 					<a href="{{ route('admin@search') }}">管理者検索</a>
 					<a href="{{ route('admin@account_create') }}">ユーザ追加</a>
