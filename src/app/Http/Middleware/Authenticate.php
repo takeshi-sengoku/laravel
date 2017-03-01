@@ -13,7 +13,27 @@ class Authenticate {
     }
 
     public function handle($request, Closure $next) {
-        return $next($request);
+        $scope = ['read' => 'sentence', 'write' => 'sentence', 'write' => 'test'];
+
+        if (!$request->session()->has('access-token')) {
+            $redirect_url = sprintf(
+                'http://192.168.56.101:3000?%s',
+                http_build_query([
+                    'response_type' => 'code',
+                    'client_id'     => 'sample',
+                    'scope'         => implode(' ', array_map(function ($key, $value) {return sprintf('%s:%s', $key, $value);}, array_keys($scope), array_values($scope))),
+                    'state'         => 'f65d4aga',
+                ])
+            );
+            return redirect(sprintf('http://192.168.56.101:3000/oauth/authorize?redirect_uri=%s', $redirect_url));
+        }
+
+        if ($request->session()->has('access-token')) {
+            return $next($request);
+        }
+
+        dd(11);
+
 
         if ($this->auth->guest()) {
             // ログインしていない時

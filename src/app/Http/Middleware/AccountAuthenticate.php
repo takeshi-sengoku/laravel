@@ -18,6 +18,8 @@ class AccountAuthenticate
 
     public function handle($request, Closure $next)
     {
+
+
         if ($this->auth->guest()) {
             // ログインしていない時
             if ($request->ajax()) {

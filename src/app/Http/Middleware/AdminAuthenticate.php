@@ -14,6 +14,7 @@ class AdminAuthenticate
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
+        dd(__FILE__);
     }
 
     public function handle($request, Closure $next)
