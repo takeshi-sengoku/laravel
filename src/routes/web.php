@@ -13,9 +13,14 @@
 // ======================================
 // Nobdy
 // ======================================
+
+Route::get('auth/code', 'AuthController@code')->name('auth@code');
+
 Route::group([
     'middleware' => 'auth:account'
 ], function () {
+
+
     Route::get('/', 'SentenceController@list')->name('sentence@list');
 
 //     Route::get('{screen_name}/{id}', 'SentenceController@get')->name('sentence@get')->where([

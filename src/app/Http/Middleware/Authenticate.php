@@ -1,50 +1,53 @@
-<?php // app/Http/Middleware/Authenticate.php
+<?php
+// app/Http/Middleware/Authenticate.php
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use App\Http\Controllers\AuthController;
 
-class Authenticate {
+class Authenticate
+{
 
     protected $auth;
 
-    public function __construct(Guard $auth) {
+    public function __construct(Guard $auth)
+    {
         $this->auth = $auth;
     }
 
-    public function handle($request, Closure $next) {
-        $scope = ['read' => 'sentence', 'write' => 'sentence', 'write' => 'test'];
-
-        if (!$request->session()->has('access-token')) {
-            $redirect_url = sprintf(
-                'http://192.168.56.101:3000?%s',
-                http_build_query([
-                    'response_type' => 'code',
-                    'client_id'     => 'sample',
-                    'scope'         => implode(' ', array_map(function ($key, $value) {return sprintf('%s:%s', $key, $value);}, array_keys($scope), array_values($scope))),
-                    'state'         => 'f65d4aga',
-                ])
-            );
-            return redirect(sprintf('http://192.168.56.101:3000/oauth/authorize?redirect_uri=%s', $redirect_url));
-        }
-
-        if ($request->session()->has('access-token')) {
+    public function handle($request, Closure $next)
+    {
+        if ($this->isAuthed($request)) {
             return $next($request);
         }
 
-        dd(11);
+        // 1. code取得のためのリダイレクト。認証画面へリダイレクトする
+        $scope = [
+            'read' => 'sentence',
+            'write' => 'sentence',
+            'write' => 'test'
+        ];
+        $redirect_url = sprintf('http://node.local-fw.com:3000/oauth/authorize?%s', http_build_query([
+            'redirect_uri' => AuthController::REDIRECT_URI,
+            'response_type' => 'code',
+            'client_id' => 'sample',
+            'scope' => implode(' ', array_map(function ($key, $value) {
+                return sprintf('%s:%s', $key, $value);
+            }, array_keys($scope), array_values($scope))),
+            'state' => 'f65d4aga'
+        ]));
+        return redirect($redirect_url);
+    }
 
-
-        if ($this->auth->guest()) {
-            // ログインしていない時
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('auth/login');
-            }
+    public function isAuthed($request)
+    {
+        if (! $request->session()->has('access-token')) {
+            return false;
         }
 
-        // ログインしている時
-        return $next($request);
+        $access_token = $request->session()->get('access-token');
+
+        return true;
     }
 }
